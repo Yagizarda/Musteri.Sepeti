@@ -1,16 +1,14 @@
 package com.example.shopping.service.impl;
+import java.util.Set;
+import java.util.Optional;
 
 import com.example.shopping.entity.Cart;
-import com.example.shopping.entity.Customer;
 import com.example.shopping.entity.Product;
 import com.example.shopping.repository.CartRepository;
-import com.example.shopping.repository.CustomerRepository;
 import com.example.shopping.repository.ProductRepository;
 import com.example.shopping.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -53,13 +51,43 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart removeProductFromCart(Long customerId, Long productId) {
+        
         Cart cart = cartRepository.findByCustomer_Id(customerId);
-        @SuppressWarnings("unchecked")
-		Optional<Product> product = ((Optional<Product>) cart.getProducts()).stream().filter(p -> p.getId().equals(productId)).findFirst();
-        if (product.isPresent()) {
-            cart.getProducts().remove(product.get());
-            cart.setTotalPrice(cart.getTotalPrice() - product.get().getPrice());
+        
+    
+        Set<Product> products = cart.getProducts();
+        
+       
+        Optional<Product> productToRemove = products.stream()
+                .filter(product -> product.getId().equals(productId))
+                .findFirst();
+        
+        if (productToRemove.isPresent()) {
+            Product product = productToRemove.get();
+         
+            products.remove(product);
+        
+            cart.setTotalPrice(cart.getTotalPrice() - product.getPrice());
         }
+        
+      
         return cartRepository.save(cart);
     }
+	@Override
+	public void clearCart(Long customerId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Cart getCartByCustomerId1(Long customerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Cart getCartByCustomerId(Long customerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

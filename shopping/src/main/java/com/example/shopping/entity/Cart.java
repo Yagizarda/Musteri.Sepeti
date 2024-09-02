@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import javax.persistence.Id;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
 
@@ -43,5 +44,10 @@ public class Cart extends BaseEntity {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+	public List<CartItem> getCartItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
  
 }
