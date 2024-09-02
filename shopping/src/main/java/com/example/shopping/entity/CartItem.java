@@ -8,7 +8,7 @@ public class CartItem {
 	}
 
 	public int getQuantity() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
