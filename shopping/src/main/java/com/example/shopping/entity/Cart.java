@@ -20,7 +20,7 @@ public class Cart extends BaseEntity {
 
     private double totalPrice;
 
-    // Getter ve Setter metodları
+
     public Long getId() {
         return id;
     }
